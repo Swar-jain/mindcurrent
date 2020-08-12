@@ -6,8 +6,8 @@ class TrialSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Trial
-        fields = ('id',
-                  'email',
+        fields = ('id_pk',
+                  'user_email',
                   'event_id',
                   'summary',
                   'start_dateTime',

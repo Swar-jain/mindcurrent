@@ -14,13 +14,13 @@ from rest_framework.decorators import api_view
 def trial_list(request):
     if request.method == 'GET':
         trials = Trial.objects.all()
-        
         email = request.GET.get('email', None)
         if email is not None:
             trials = trial.filter(email__icontains=email)
-        hello()
-        
+            hello(trials_serializer.data)
+            
         trial_serializer = TrialSerializer(trials, many=True)
+        hello(trial_serializer.data)
         return JsonResponse(trial_serializer.data, safe=False)
         
         # 'safe=False' for objects serialization
@@ -62,13 +62,14 @@ def trial_list_published(request):
         
     if request.method == 'GET':
         trials_serializer = TrialSerializer(trials, many=True)
+        print(trials_serializer.data)
         return JsonResponse(trials_serializer.data, safe=False)
-        hello()
+    
 
 
 
-def hello():
-    print("Hey Swar!")
+def hello(t):
+    print(t)
     
     
 
